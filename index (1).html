@@ -1,0 +1,554 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<style>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}body{margin:0}img{max-width:100%}[hidden]{display:none!important}</style>
+</head>
+<body>
+<title>Central Idea Practice</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@600;700&family=Atkinson+Hyperlegible:wght@400;700&display=swap">
+<style>
+/* Layout: a reading notebook. One task card at a time, passage above, highlighter marks what matters. Teal ink + highlighter yellow. */
+:root {
+  --bg: #F2F5F3; --surface: #FFFFFF; --surface-2: #E7EEEA; --ink: #1C2A30; --ink-soft: #52626A; --line: #CBD7D2;
+  --teal: #0E6B70; --teal-ink: #FFFFFF; --hl: #FFE27A; --hl-ink: #2A2200;
+  --good: #1F7A4D; --good-bg: #DDF2E5; --try: #99470E; --try-bg: #FBE4CF; --low: #A3271B; --low-bg: #F8DAD5;
+  --font-display: "Baloo 2", "Trebuchet MS", system-ui, sans-serif;
+  --font-body: "Atkinson Hyperlegible", Verdana, system-ui, sans-serif;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #0F1A1D; --surface: #172428; --surface-2: #1F2F34; --ink: #E7F0EE; --ink-soft: #A3B4B5; --line: #2E4146;
+    --teal: #5CC3C2; --teal-ink: #0F1A1D; --hl: #5E5112; --hl-ink: #FFF4C7;
+    --good: #7ED6A6; --good-bg: #173A2A; --try: #F2B07A; --try-bg: #3D2716; --low: #F4A79C; --low-bg: #46201B; color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --bg: #0F1A1D; --surface: #172428; --surface-2: #1F2F34; --ink: #E7F0EE; --ink-soft: #A3B4B5; --line: #2E4146;
+  --teal: #5CC3C2; --teal-ink: #0F1A1D; --hl: #5E5112; --hl-ink: #FFF4C7;
+  --good: #7ED6A6; --good-bg: #173A2A; --try: #F2B07A; --try-bg: #3D2716; --low: #F4A79C; --low-bg: #46201B; color-scheme: dark;
+}
+* { box-sizing: border-box; }
+[hidden] { display: none !important; }
+body { background: var(--bg); color: var(--ink); font-family: var(--font-body); font-size: 18px; line-height: 1.55;
+  padding-left: max(16px, env(safe-area-inset-left, 0px)); padding-right: max(16px, env(safe-area-inset-right, 0px)); padding-block: 16px 56px; }
+.wrap { max-width: 860px; margin: 0 auto; display: grid; gap: 16px; }
+h1, h2, h3 { font-family: var(--font-display); font-weight: 700; line-height: 1.15; margin: 0; text-wrap: balance; }
+h1 { font-size: 30px; } h2 { font-size: 24px; } h3 { font-size: 20px; }
+p { margin: 0; }
+button, input, textarea, select { font: inherit; color: inherit; }
+button { cursor: pointer; }
+:focus-visible { outline: 3px solid var(--teal); outline-offset: 2px; }
+header.top { display: flex; align-items: center; gap: 10px 14px; flex-wrap: wrap; }
+header.top h1 { color: var(--teal); }
+.tag { font-size: 13px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; background: var(--hl); color: var(--hl-ink); padding: 2px 10px; border-radius: 999px; }
+.spacer { flex: 1; }
+.who { font-size: 16px; color: var(--ink-soft); }
+.card { background: var(--surface); border: 1px solid var(--line); border-radius: 16px; padding: 20px; display: grid; gap: 14px; min-width: 0; }
+.hint { font-size: 15px; color: var(--ink-soft); }
+.row { display: flex; gap: 10px; flex-wrap: wrap; align-items: center; }
+.btn { border: 0; border-radius: 12px; padding: 11px 20px; min-height: 46px; font-family: var(--font-display); font-weight: 700; font-size: 18px; background: var(--teal); color: var(--teal-ink); }
+.btn.quiet { background: var(--surface-2); color: var(--ink); border: 1px solid var(--line); }
+.btn.small { font-size: 15px; min-height: 36px; padding: 6px 12px; }
+.btn:disabled { opacity: .45; cursor: not-allowed; }
+.linkish { background: none; border: 0; color: var(--teal); text-decoration: underline; padding: 4px; font-size: 15px; }
+input[type="text"], input[type="password"], textarea { border: 2px solid var(--line); border-radius: 10px; padding: 10px 12px; background: var(--bg); min-width: 0; width: 100%; }
+#codeInput { font-size: 24px; letter-spacing: .12em; text-transform: uppercase; max-width: 240px; font-family: var(--font-display); }
+.err { color: var(--low); background: var(--low-bg); border-radius: 10px; padding: 8px 12px; font-size: 16px; }
+label.q { display: grid; gap: 6px; font-weight: 700; font-size: 16px; }
+
+/* name grid */
+.names { display: grid; grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); gap: 10px; }
+.name { text-align: left; border: 2px solid var(--teal); border-radius: 12px; padding: 12px; background: var(--surface); font-family: var(--font-display); font-weight: 700; font-size: 19px; display: grid; }
+.name small { font-family: var(--font-body); font-weight: 400; font-size: 14px; color: var(--ink-soft); }
+.name:disabled { border-color: var(--line); color: var(--ink-soft); cursor: not-allowed; }
+
+/* practice */
+.voicebar { display: flex; gap: 8px 12px; align-items: center; flex-wrap: wrap; font-size: 15px; color: var(--ink-soft); }
+.seg { display: inline-flex; border: 1.5px solid var(--line); border-radius: 999px; overflow: hidden; }
+.seg button { border: 0; background: transparent; padding: 5px 14px; font-size: 15px; }
+.seg button[aria-pressed="true"] { background: var(--teal); color: var(--teal-ink); }
+.ladder { display: flex; gap: 6px; align-items: center; flex-wrap: wrap; }
+.rung { font-size: 14px; font-weight: 700; padding: 4px 12px; border-radius: 999px; background: var(--surface-2); color: var(--ink-soft); border: 1px solid var(--line); }
+.rung.now { background: var(--teal); color: var(--teal-ink); border-color: var(--teal); }
+.rung.passed { background: var(--good-bg); color: var(--good); border-color: var(--good); }
+.passage h2 { color: var(--teal); }
+.passage .ptext { display: grid; gap: 12px; max-width: 68ch; }
+.passage p { font-size: 20px; line-height: 1.8; }
+.pnum { font-family: var(--font-display); font-weight: 700; color: var(--teal); margin-right: 6px; }
+.hear { display: inline-flex; align-items: center; gap: 6px; border: 1px solid var(--line); background: var(--surface-2); border-radius: 999px; padding: 4px 12px 4px 8px; font-size: 15px; min-height: 34px; vertical-align: middle; }
+.hear svg { width: 18px; height: 18px; }
+.hear.playing { background: var(--hl); color: var(--hl-ink); border-color: var(--hl); }
+.qhead { display: flex; gap: 10px; align-items: flex-start; justify-content: space-between; flex-wrap: wrap; }
+.qhead h3 { flex: 1 1 260px; }
+.step { font-size: 13px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; color: var(--ink-soft); }
+.choices { display: grid; gap: 10px; }
+.choice { text-align: left; display: flex; gap: 12px; align-items: flex-start; border: 2px solid var(--line); border-radius: 12px; padding: 12px 14px; background: var(--surface); font-size: 18px; }
+.choice .dot { flex: none; width: 22px; height: 22px; border-radius: 50%; border: 2px solid var(--ink-soft); margin-top: 3px; }
+.choice:hover:not(:disabled) { border-color: var(--teal); }
+.choice:disabled { cursor: default; }
+.choice.right { border-color: var(--good); background: var(--good-bg); }
+.choice.right .dot { background: var(--good); border-color: var(--good); }
+.choice.wrong { border-color: var(--try); background: var(--try-bg); }
+.choice.wrong .dot { background: var(--try); border-color: var(--try); }
+.sent { line-height: 1.6; }
+.fb { border-radius: 12px; padding: 12px 14px; display: grid; gap: 6px; }
+.fb.ok { background: var(--good-bg); color: var(--ink); }
+.fb.ok b { color: var(--good); }
+.fb.no { background: var(--try-bg); color: var(--ink); }
+.fb.no b { color: var(--try); }
+mark { background: var(--hl); color: var(--hl-ink); padding: 0 3px; border-radius: 4px; }
+.lesson { border: 2px solid var(--hl); }
+.lesson ol { margin: 0; padding-left: 24px; display: grid; gap: 6px; }
+.example { background: var(--surface-2); border-radius: 12px; padding: 12px 14px; display: grid; gap: 6px; font-size: 17px; }
+.stars { font-size: 40px; letter-spacing: .12em; color: var(--teal); line-height: 1; }
+
+/* teacher */
+.facts { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 12px; }
+.fact { background: var(--surface); border: 1px solid var(--line); border-radius: 14px; padding: 14px 16px; display: grid; gap: 2px; }
+.fact b { font-family: var(--font-display); font-size: 28px; line-height: 1.1; font-variant-numeric: tabular-nums; }
+.fact span { font-size: 15px; color: var(--ink-soft); }
+.codebig { font-family: var(--font-display); font-weight: 700; font-size: 34px; letter-spacing: .12em; background: var(--hl); color: var(--hl-ink); padding: 2px 14px; border-radius: 10px; }
+.twocol { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 16px; }
+.scroll { overflow-x: auto; }
+table { border-collapse: collapse; width: 100%; min-width: 640px; font-size: 16px; font-variant-numeric: tabular-nums; }
+th, td { text-align: left; padding: 9px 8px; border-bottom: 1px solid var(--line); vertical-align: middle; }
+th { font-size: 14px; color: var(--ink-soft); font-weight: 700; }
+.pill { display: inline-block; font-size: 14px; font-weight: 700; padding: 2px 10px; border-radius: 999px; white-space: nowrap; }
+.p-good { background: var(--good-bg); color: var(--good); }
+.p-mid { background: var(--try-bg); color: var(--try); }
+.p-low { background: var(--low-bg); color: var(--low); }
+.p-none { background: var(--surface-2); color: var(--ink-soft); }
+.sample { font-size: 12px; color: var(--ink-soft); margin-left: 4px; }
+.skill { display: grid; gap: 4px; }
+.skill .top { display: flex; justify-content: space-between; gap: 10px; font-weight: 700; }
+.bar { height: 12px; border-radius: 999px; background: var(--surface-2); overflow: hidden; border: 1px solid var(--line); }
+.bar i { display: block; height: 100%; background: var(--teal); }
+.skill .tip { font-size: 15px; color: var(--ink-soft); }
+.status { font-size: 15px; color: var(--ink-soft); }
+.status.ok { color: var(--good); }
+.note { background: var(--surface-2); border-radius: 12px; padding: 10px 14px; font-size: 15px; color: var(--ink-soft); }
+.toast { position: fixed; left: 50%; bottom: calc(20px + env(safe-area-inset-bottom, 0px)); transform: translateX(-50%); background: var(--ink); color: var(--bg); padding: 10px 18px; border-radius: 999px; opacity: 0; transition: opacity .3s; pointer-events: none; max-width: calc(100% - 32px); text-align: center; z-index: 40; }
+.toast.show { opacity: 1; }
+@media (prefers-reduced-motion: reduce) { * { transition: none !important; } }
+</style>
+
+<div class="wrap">
+  <header class="top">
+    <h1 id="appTitle">Central Idea Practice</h1>
+    <div class="spacer"></div>
+    <span class="who" id="who" hidden></span>
+  </header>
+
+  <!-- ============ STUDENT ============ -->
+  <section class="card" id="sJoin" style="max-width:560px">
+    <h2>Join your class</h2>
+    <p>Type the class code your teacher gave you.</p>
+    <form class="row" id="joinForm">
+      <input type="text" id="codeInput" aria-label="Class code" placeholder="ABC-123" autocomplete="off" maxlength="10" spellcheck="false">
+      <button class="btn" type="submit">Join</button>
+    </form>
+    <p class="err" id="codeErr" hidden>That code doesn’t match your class. Check the code on the board and try again.</p>
+  </section>
+
+  <section class="card" id="sName" hidden>
+    <h2>Tap your name</h2>
+    <p class="hint">Pick the nickname your teacher gave you.</p>
+    <div class="names" id="nameGrid"></div>
+    <div class="row"><button class="linkish" id="backToCode" type="button">Wrong class? Enter a different code</button></div>
+  </section>
+
+  <div id="sPractice" class="wrap" hidden></div>
+
+  <!-- ============ TEACHER ============ -->
+  <section class="card" id="tLogin" hidden style="max-width:560px">
+    <h2>Teacher sign-in</h2>
+    <form class="row" id="pinForm">
+      <label class="q" for="pin" style="flex:1 1 220px">Teacher password<input type="password" id="pin" autocomplete="off" maxlength="20"></label>
+      <button class="btn" type="submit" style="align-self:end">Sign in</button>
+    </form>
+    <p class="err" id="pinErr" hidden>That password didn’t match. Try again.</p>
+    <p class="hint">Prototype password: <b>1234!</b> (you can change it after you sign in).</p>
+    <div class="row"><button class="linkish" id="toStudent" type="button">Go to the student page</button></div>
+  </section>
+
+  <div id="tDash" class="wrap" hidden></div>
+
+  <footer class="row" id="foot" style="justify-content:center">
+    <button class="linkish" id="teacherLink" type="button">Teacher sign-in</button>
+  </footer>
+</div>
+<div class="toast" id="toast" role="status"></div>
+
+<script>
+(function () {
+  "use strict";
+  var $ = function (id) { return document.getElementById(id); };
+  function esc(s) { return String(s == null ? "" : s).replace(/[&<>"]/g, function (c) { return { "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]; }); }
+  var toastT; function toast(m) { var t = $("toast"); t.textContent = m; t.classList.add("show"); clearTimeout(toastT); toastT = setTimeout(function () { t.classList.remove("show"); }, 2600); }
+
+  /* ---------------- Content ---------------- */
+  var P = {
+    l1a: { title: "The Tortoise Who Digs for Everyone", paras: [
+      "The gopher tortoise is a small Florida reptile that does a big job for its neighbors. It is about the size of a shoebox, and it moves slowly. But this quiet animal helps keep a whole community of animals safe.",
+      "Gopher tortoises dig deep burrows in sandy soil. A burrow can stretch up to 40 feet long and about 10 feet deep. Inside, the air stays cool in summer and warm in winter.",
+      "More than 350 kinds of animals use these burrows. Frogs, snakes, mice, and owls hide there from heat, cold, and danger. When a wildfire sweeps through, many animals rush into a burrow to stay alive. That is why scientists call the gopher tortoise a keystone species. Without it, many other animals would struggle."],
+      qs: [
+        { id: "l1a-1", skill: "topic", prompt: "What is the topic of this passage?", c: ["gopher tortoises", "wildfires", "sandy soil", "owls"], key: 0, why: "The topic is what the whole passage is about, in a few words. Every paragraph is about gopher tortoises." },
+        { id: "l1a-2", skill: "ci", prompt: "Which sentence from the passage states the central idea?", c: ["The gopher tortoise is a small Florida reptile that does a big job for its neighbors.", "It is about the size of a shoebox, and it moves slowly.", "Inside, the air stays cool in summer and warm in winter.", "Frogs, snakes, mice, and owls hide there from heat, cold, and danger."], key: 0, why: "This sentence tells what the author wants you to understand about gopher tortoises. The other sentences are details that support it." },
+        { id: "l1a-3", skill: "evidence", type: "hot", para: 2, key: 2, prompt: "Tap the sentence in paragraph 3 that best shows how burrows keep animals alive.", why: "Animals rush into the burrow to survive a wildfire. That detail proves the tortoise does a big job for its neighbors." }] },
+    l1b: { title: "Learn to Swim", paras: [
+      "Every kid in Florida should learn how to swim. Our state has water on three sides, plus thousands of lakes, rivers, and pools. Knowing how to swim keeps kids safe around all of that water.",
+      "Swimming is a safety skill, like looking both ways before you cross the street. A strong swimmer knows how to float, tread water, and get back to the edge. These skills can save a life if someone falls in by accident.",
+      "Swimming is also good exercise. It makes your heart and muscles stronger. Many kids make friends on swim teams or while playing at the beach. Learning to swim opens the door to safety, health, and fun."],
+      qs: [
+        { id: "l1b-1", skill: "topic", prompt: "What is the topic of this passage?", c: ["learning to swim", "Florida lakes", "swim teams", "crossing the street"], key: 0, why: "All three paragraphs talk about learning to swim. The other choices show up in only one spot." },
+        { id: "l1b-2", skill: "ci", prompt: "Which sentence from the passage states the central idea?", c: ["Every kid in Florida should learn how to swim.", "It makes your heart and muscles stronger.", "Many kids make friends on swim teams or while playing at the beach.", "A strong swimmer knows how to float, tread water, and get back to the edge."], key: 0, why: "This sentence tells the author’s big point. Every other paragraph gives reasons that support it." },
+        { id: "l1b-3", skill: "evidence", type: "hot", para: 1, key: 2, prompt: "Tap the sentence in paragraph 2 that best explains why swimming matters for safety.", why: "This sentence says swimming skills can save a life. That is the strongest reason it is a safety skill." }] },
+    l2a: { title: "Follow the Moon", paras: [
+      "On a summer night on a Florida beach, tiny sea turtles climb out of their nest in the sand. Each one is small enough to fit in your hand. Right away, they start crawling toward the brightest light they can see.",
+      "For millions of years, the brightest light was the moon shining on the ocean. Following it led the hatchlings straight to the water. Today, porch lights, streetlights, and hotel signs can shine brighter than the moon. Many hatchlings crawl the wrong way, toward roads and parking lots.",
+      "Some beach towns now have rules for nesting season. People turn off outdoor lights or use special red or amber bulbs that turtles do not notice as much. On these darker beaches, more hatchlings make it safely to the sea."],
+      qs: [
+        { id: "l2a-1", skill: "topic", prompt: "What is the topic of this passage?", c: ["sea turtle hatchlings", "the moon", "hotel signs", "parking lots"], key: 0, why: "Every paragraph is about baby sea turtles and how they find the ocean." },
+        { id: "l2a-2", skill: "ci", prompt: "The author never states the central idea in one sentence. Which statement tells it best?", c: ["Bright lights near beaches can lead baby sea turtles the wrong way, but people can help by changing their lights.", "Sea turtle hatchlings are small enough to fit in your hand.", "The moon shines on the ocean at night.", "Some beach towns have rules."], key: 0, why: "This choice adds up all three paragraphs: how hatchlings find the sea, the problem with lights, and how people help." },
+        { id: "l2a-3", skill: "evidence", type: "hot", para: 2, key: 1, prompt: "Tap the sentence in paragraph 3 that tells what people do to help the turtles.", why: "Turning off lights and using red or amber bulbs are the actions people take. The next sentence tells the result." }] },
+    l2b: { title: "Dogs on the Job", paras: [
+      "Most dogs spend their days napping and playing fetch. Some dogs, though, go to work every morning.",
+      "A dog’s nose is thousands of times more sensitive than a person’s. At airports, trained dogs sniff bags to find things that are not allowed. After earthquakes and storms, search-and-rescue dogs follow their noses to people trapped under rubble.",
+      "Other dogs use their calm, gentle nature. Guide dogs help people who are blind cross streets and get around town. Therapy dogs visit hospitals and schools to help people feel less worried."],
+      qs: [
+        { id: "l2b-1", skill: "topic", prompt: "What is the topic of this passage?", c: ["working dogs", "airports", "earthquakes", "napping"], key: 0, why: "The passage is about dogs that have jobs. Airports and earthquakes are only examples." },
+        { id: "l2b-2", skill: "ci", prompt: "The author never states the central idea in one sentence. Which statement tells it best?", c: ["Dogs use their special skills to do important jobs that help people.", "A dog’s nose is very sensitive.", "Therapy dogs visit hospitals.", "Most dogs like to play fetch."], key: 0, why: "Paragraph 2 is about their noses, and paragraph 3 is about their calm nature. Both are skills that help people. This choice covers both." },
+        { id: "l2b-3", skill: "evidence", type: "hot", para: 1, key: 2, prompt: "Tap the sentence in paragraph 2 that shows a dog’s nose helping save lives.", why: "Search-and-rescue dogs find trapped people. That shows a dog’s skill saving lives." }] },
+    l3a: { title: "Manatees Need Warm Water", paras: [
+      "Manatees are large, gentle animals that swim slowly through Florida’s rivers and bays. They may look like they have plenty of fat, but manatees cannot handle cold water. Staying warm is a matter of life or death for them.",
+      "When the water drops below about 68 degrees, manatees can get sick from the cold. So each winter, they travel to warmer places. Many crowd into natural springs, where the water stays about 72 degrees all year. Others gather near power plants that release warm water.",
+      "At Blue Spring State Park, rangers have counted hundreds of manatees on a single cold morning. Because so many manatees depend on a few warm spots, Floridians work to protect the springs and keep the water clean."],
+      qs: [
+        { id: "l3a-1", skill: "ci", prompt: "Which statement best tells the central idea?", c: ["Manatees depend on warm water to survive winter, so protecting warm places is important.", "Manatees are large and gentle.", "Blue Spring State Park has rangers.", "Power plants release warm water."], key: 0, why: "This choice covers all three paragraphs: manatees need warmth, they travel to warm places, and people protect those places." },
+        { id: "l3a-2", skill: "develop", prompt: "How does paragraph 2 develop the central idea?", c: ["It explains what cold water does to manatees and where they go to stay warm.", "It describes what manatees look like.", "It tells how rangers count manatees.", "It explains how power plants make electricity."], key: 0, why: "Paragraph 2’s job is to explain. It shows why warm water is life or death and where manatees find it." },
+        { id: "l3a-3", skill: "evidence", type: "hot", para: 2, key: 1, prompt: "Tap the sentence in paragraph 3 that best shows why protecting the springs matters.", why: "This sentence connects the two ideas: many manatees depend on a few warm spots, so people protect them." }] },
+    l3b: { title: "Not Just Books", paras: [
+      "Fifty years ago, a trip to the library meant one thing: books. People came to borrow novels, look up facts in encyclopedias, and read quietly at long wooden tables.",
+      "Walk into a library today and you might find something very different. Many libraries lend laptops and Wi-Fi hotspots. Some have 3D printers, recording studios, and even cake pans you can check out. Others offer free classes in coding, cooking, and job skills.",
+      "Libraries look different now, but their main goal has not changed. They still give everyone in the community a free way to learn, explore, and grow."],
+      qs: [
+        { id: "l3b-1", skill: "ci", prompt: "Which statement best tells the central idea?", c: ["Libraries offer many new things today, but they still help everyone learn.", "Libraries have long wooden tables.", "Some libraries lend cake pans.", "People used to read encyclopedias."], key: 0, why: "Paragraph 3 says it most clearly: libraries changed, but their goal of helping people learn stayed the same." },
+        { id: "l3b-2", skill: "develop", prompt: "How does paragraph 2 develop the central idea?", c: ["It gives examples of the new things libraries offer today.", "It explains why people should read more books.", "It tells the history of encyclopedias.", "It describes how to get a library card."], key: 0, why: "Paragraph 2 lists laptops, 3D printers, and classes. These examples show how much libraries have changed." },
+        { id: "l3b-3", skill: "develop", prompt: "How does paragraph 1 help build the central idea?", c: ["It shows what libraries used to be like, so readers can see how much they changed.", "It lists the classes libraries offer.", "It explains how 3D printers work.", "It argues that libraries should close."], key: 0, why: "You need to know what libraries were like before you can see how they changed. That is paragraph 1’s job." }] }
+  };
+  var SKILLS = {
+    topic: { name: "Naming the topic", tip: "Students may pick a detail that shows up in only one paragraph. Have them ask: what does every paragraph talk about?" },
+    ci: { name: "Choosing the central idea", tip: "Students may pick a true detail instead of the big idea. Teach: topic + what the author says about it = central idea. Check that it fits every paragraph." },
+    evidence: { name: "Finding support", tip: "Students may tap a related sentence that doesn’t prove the point. Have them reread the question and ask: which sentence proves it?" },
+    develop: { name: "How paragraphs build it", tip: "Students may describe what a paragraph says instead of what it does. Teach paragraph jobs: introduce, explain, give examples, show a problem or solution." }
+  };
+  var LEVELS = [
+    { n: 1, name: "Stated central idea", passages: ["l1a", "l1b"], lesson: {
+      title: "Topic + what the author says = central idea",
+      steps: ["Name the topic in 1 to 3 words. What is every paragraph about?", "Ask: what does the author keep saying about the topic?", "Put them together in one sentence. That is the central idea."],
+      example: "<b>Topic:</b> gopher tortoises<br><b>The author keeps saying:</b> they help other animals<br><b>Central idea:</b> <mark>Gopher tortoises help many other animals by digging burrows.</mark>",
+      tip: "A detail is about one part of the text. The central idea fits every paragraph." } },
+    { n: 2, name: "Implied central idea", passages: ["l2a", "l2b"], lesson: {
+      title: "When the author doesn’t say it, add it up",
+      steps: ["Read one paragraph at a time. Think of a few words for what it is mostly about.", "Look at your words together. What do they have in common?", "Write one sentence that covers all of them."],
+      example: "<b>¶1</b> hatchlings follow light &nbsp;·&nbsp; <b>¶2</b> lights trick them &nbsp;·&nbsp; <b>¶3</b> people help<br><b>Central idea:</b> <mark>Bright lights can lead hatchlings the wrong way, but people can help.</mark>",
+      tip: "If a choice matches only one paragraph, it is a detail. Pick the one that covers them all." } },
+    { n: 3, name: "How the central idea develops", passages: ["l3a", "l3b"], lesson: {
+      title: "Every paragraph has a job",
+      steps: ["Find the central idea first.", "For each paragraph, ask: what is its job? Introduce, explain, give examples, show a problem, show a solution, or sum up.", "Then ask: how does that job help me understand the central idea?"],
+      example: "<b>Central idea:</b> Manatees need warm water to survive winter.<br><b>¶2’s job:</b> <mark>explain</mark> what cold does to manatees and where they go to stay warm.",
+      tip: "Don’t just retell the paragraph. Say what it does for the central idea." } }
+  ];
+  function sentences(t) { return t.match(/[^.!?]+[.!?]+[”"’]?/g).map(function (x) { return x.trim(); }); }
+
+  /* ---------------- Storage (this device only) ---------------- */
+  var KEY = "ci-class-v2";
+  function load() { try { return JSON.parse(localStorage.getItem(KEY)); } catch (e) { return null; } }
+  function save() { try { localStorage.setItem(KEY, JSON.stringify(D)); } catch (e) {} }
+  var D = load();
+  if (!D) {
+    D = { code: "CIP-427", pin: "1234!", roster: ["Arctic Panther", "Blaze Eagle", "Cobalt Tiger", "Comet Bear", "Copper Wolf", "Coral Dolphin", "Iron Shark", "Jade Falcon", "Lilac Owl", "Mango Parrot", "Pearl Otter", "Rocket Lynx", "Sunny Gecko", "Thunder Fox", "Turbo Moose", "Velvet Koala"], results: {} };
+    save();
+  }
+
+  /* ---------------- Read-aloud (US English voices only) ---------------- */
+  var FEMALE = /samantha|google us english|aria|jenny|zira|ava|allison|susan|joanna|salli|kendra|kimberly|ivy|michelle|nicky|emma/i;
+  var MALE = /alex|aaron|fred|david|guy|mark|evan|nathan|joey|matthew|justin|christopher|eric|andrew|tom|roger/i;
+  var voicePref = "female";
+  try { voicePref = localStorage.getItem("ci-pilot-voice") || "female"; } catch (e) {}
+  var vFemale = null, vMale = null;
+  function pickVoices() {
+    try {
+      var us = (speechSynthesis.getVoices() || []).filter(function (v) { return /^en[-_]US$/i.test(v.lang); });
+      vFemale = us.filter(function (v) { return v.name === "Google US English"; })[0] || us.filter(function (v) { return FEMALE.test(v.name); })[0] || null;
+      vMale = us.filter(function (v) { return MALE.test(v.name) && !FEMALE.test(v.name); })[0] || null;
+    } catch (e) {}
+  }
+  try { pickVoices(); speechSynthesis.addEventListener("voiceschanged", pickVoices); } catch (e) {}
+  var SPK = '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 9h4l5-4v14l-5-4H4z" fill="currentColor"/><path d="M16 8.5a5 5 0 0 1 0 7M18.5 6a8.5 8.5 0 0 1 0 12" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round"/></svg>';
+  function speak(text, btn) {
+    try {
+      speechSynthesis.cancel();
+      document.querySelectorAll(".hear.playing").forEach(function (b) { b.classList.remove("playing"); });
+      var u = new SpeechSynthesisUtterance(String(text).replace(/¶/g, "paragraph "));
+      u.lang = "en-US"; u.rate = .92;
+      var v = voicePref === "male" ? (vMale || vFemale) : (vFemale || vMale);
+      if (v) u.voice = v;
+      if (btn) { btn.classList.add("playing"); u.onend = u.onerror = function () { btn.classList.remove("playing"); }; }
+      speechSynthesis.speak(u);
+    } catch (e) {}
+  }
+  function hear(text, label) { return '<button class="hear" type="button" data-say="' + esc(text) + '">' + SPK + (label || "Hear it") + "</button>"; }
+  function bindHear(root) { root.querySelectorAll("[data-say]").forEach(function (b) { b.addEventListener("click", function () { speak(b.dataset.say, b); }); }); }
+
+  /* ---------------- Views ---------------- */
+  var VIEWS = ["sJoin", "sName", "sPractice", "tLogin", "tDash"];
+  function view(id) {
+    VIEWS.forEach(function (v) { $(v).hidden = v !== id; });
+    var student = id === "sName" || id === "sPractice";
+    $("foot").hidden = id !== "sJoin";
+    $("who").hidden = !(id === "sPractice" || id === "tDash");
+    try { speechSynthesis.cancel(); } catch (e) {}
+    window.scrollTo(0, 0);
+  }
+
+  /* ---------------- Student: join + name ---------------- */
+  function norm(s) { return String(s || "").toUpperCase().replace(/[^A-Z0-9]/g, ""); }
+  $("joinForm").addEventListener("submit", function (e) {
+    e.preventDefault();
+    if (norm($("codeInput").value) === norm(D.code)) { $("codeErr").hidden = true; renderNames(); view("sName"); }
+    else $("codeErr").hidden = false;
+  });
+  $("backToCode").addEventListener("click", function () { $("codeInput").value = ""; view("sJoin"); });
+  function renderNames() {
+    var g = $("nameGrid");
+    g.innerHTML = D.roster.map(function (n, i) {
+      var done = !!D.results[n];
+      return '<button class="name" type="button" data-i="' + i + '"' + (done ? " disabled" : "") + ">" + esc(n) + "<small>" + (done ? "✓ Finished" : "Ready") + "</small></button>";
+    }).join("");
+    g.querySelectorAll(".name").forEach(function (b) { b.addEventListener("click", function () { startPractice(D.roster[Number(b.dataset.i)]); }); });
+  }
+
+  /* ---------------- Student: practice engine ---------------- */
+  var S = null; // session
+  function startPractice(nick) {
+    S = { nick: nick, level: 0, part: 0, qi: 0, answered: null, passRight: 0, passed: 0, right: 0, total: 0, reteach: [], skills: {}, missed: [], mode: "q", log: [] };
+    $("who").textContent = "Reading: " + nick;
+    view("sPractice"); renderPractice();
+  }
+  function curPassage() { return P[LEVELS[S.level].passages[S.part]]; }
+  function ladder() {
+    return '<div class="ladder" aria-label="Your levels">' + LEVELS.map(function (L, i) {
+      var cls = i < S.level || (S.mode === "done" && S.passed >= L.n) ? "passed" : i === S.level && S.mode !== "done" ? "now" : "";
+      if (S.mode === "done" && S.passed < L.n) cls = "";
+      return '<span class="rung ' + cls + '">Level ' + L.n + (cls === "passed" ? " ✓" : "") + "</span>";
+    }).join("") + "</div>";
+  }
+  function voiceBar() {
+    return '<div class="voicebar"><span>Read-aloud voice</span><div class="seg" role="group" aria-label="Read-aloud voice">' +
+      '<button type="button" data-voice="female" aria-pressed="' + (voicePref === "female") + '">Female</button>' +
+      '<button type="button" data-voice="male" aria-pressed="' + (voicePref === "male") + '">Male</button></div></div>';
+  }
+  function passageCard(p) {
+    var all = p.paras.join(" ");
+    return '<section class="card passage"><div class="qhead"><h2>' + esc(p.title) + "</h2>" + hear(p.title + ". " + all, "Hear the passage") + '</div><div class="ptext">' +
+      p.paras.map(function (t, i) { return '<p><span class="pnum">¶' + (i + 1) + "</span>" + esc(t) + "</p>"; }).join("") + "</div></section>";
+  }
+  function order(q, n) {
+    var idx = []; for (var i = 0; i < n; i++) idx.push(i);
+    if (q.type === "hot") return idx;
+    var seed = q.id.split("").reduce(function (a, ch) { return (a * 31 + ch.charCodeAt(0)) % 9973; }, 7);
+    for (var j = n - 1; j > 0; j--) { seed = (seed * 37 + 11) % 9973; var k = seed % (j + 1), t = idx[j]; idx[j] = idx[k]; idx[k] = t; }
+    return idx;
+  }
+  function questionCard(p, q) {
+    var L = LEVELS[S.level], answered = S.answered !== null;
+    var opts = q.type === "hot" ? sentences(p.paras[q.para]) : q.c;
+    var h = '<section class="card" id="qCard"><span class="step">Level ' + L.n + " · " + esc(L.name) + " · Question " + (S.qi + 1) + " of " + p.qs.length + "</span>" +
+      '<div class="qhead"><h3>' + esc(q.prompt) + "</h3>" + hear(q.prompt + " " + opts.join(". ")) + "</div>" +
+      '<div class="choices">' + order(q, opts.length).map(function (i) {
+        var o = opts[i], cls = "";
+        if (answered && i === q.key) cls = " right";
+        else if (answered && i === S.answered) cls = " wrong";
+        return '<button type="button" class="choice' + (q.type === "hot" ? " sent" : "") + cls + '" data-i="' + i + '"' + (answered ? " disabled" : "") + '><span class="dot"></span><span>' + esc(o) + "</span></button>";
+      }).join("") + "</div>";
+    if (answered) {
+      var ok = S.answered === q.key;
+      var lead = ok ? ["You got it!", "Nice work!", "Yes, that’s it!"][S.total % 3] : "Not quite. Here’s why:";
+      h += '<div class="fb ' + (ok ? "ok" : "no") + '"><b>' + lead + "</b><span>" + esc(q.why) + "</span><div>" + hear(lead + " " + q.why, "Hear why") + "</div></div>" +
+        '<div class="row"><button class="btn" type="button" id="nextBtn">' + (S.qi < p.qs.length - 1 ? "Next question" : "Finish this passage") + "</button></div>";
+    } else {
+      h += '<p class="hint">You get one try. Read carefully before you tap.</p>';
+    }
+    return h + "</section>";
+  }
+  function lessonCard(L) {
+    var x = L.lesson, say = x.title + ". " + x.steps.join(" ") + " " + x.example.replace(/<[^>]+>/g, " ").replace(/&nbsp;·&nbsp;/g, ". ") + " " + x.tip;
+    return '<section class="card lesson"><span class="step">Quick lesson</span><div class="qhead"><h2>' + esc(x.title) + "</h2>" + hear(say, "Hear the lesson") + "</div>" +
+      "<ol>" + x.steps.map(function (s) { return "<li>" + esc(s) + "</li>"; }).join("") + "</ol>" +
+      '<div class="example">' + x.example + "</div><p><b>Remember:</b> " + esc(x.tip) + "</p>" +
+      '<div class="row"><button class="btn" type="button" id="lessonGo">Try another passage</button></div></section>';
+  }
+  function doneCard() {
+    var stars = Math.max(1, S.passed);
+    var msg = S.passed === 3 ? "You passed all three levels!" : S.passed > 0 ? "You passed Level " + S.passed + "." : "You worked hard today.";
+    var next = S.passed === 3 ? "You can find, explain, and support a central idea." : "Your teacher will practice the next step with you.";
+    return '<section class="card"><h2>' + esc(msg) + '</h2><div class="stars" aria-label="' + stars + ' stars">' + "★".repeat(stars) + "☆".repeat(3 - stars) + "</div>" +
+      "<p>You got <b>" + S.right + " of " + S.total + "</b> questions right on the first try. " + esc(next) + "</p>" +
+      '<p class="hint">Your work was saved for your teacher.</p><div class="row"><button class="btn" type="button" id="allDone">I’m done</button></div></section>';
+  }
+  function renderPractice() {
+    var root = $("sPractice"), h = '<div class="row" style="justify-content:space-between">' + ladder() + voiceBar() + "</div>";
+    if (S.mode === "q") { var p = curPassage(); h += passageCard(p) + questionCard(p, p.qs[S.qi]); }
+    else if (S.mode === "lesson") h += lessonCard(LEVELS[S.level]);
+    else h += doneCard();
+    root.innerHTML = h;
+    bindHear(root);
+    root.querySelectorAll("[data-voice]").forEach(function (b) { b.addEventListener("click", function () { voicePref = b.dataset.voice; try { localStorage.setItem("ci-pilot-voice", voicePref); } catch (e) {} renderPractice(); speak("This is the " + voicePref + " voice."); }); });
+    root.querySelectorAll(".choice").forEach(function (b) { b.addEventListener("click", function () { answer(Number(b.dataset.i)); }); });
+    var nb = $("nextBtn"); if (nb) nb.addEventListener("click", next);
+    var lg = $("lessonGo"); if (lg) lg.addEventListener("click", function () { S.mode = "q"; S.part = 1; S.qi = 0; S.passRight = 0; renderPractice(); window.scrollTo(0, 0); });
+    var ad = $("allDone"); if (ad) ad.addEventListener("click", function () { S = null; $("codeInput").value = ""; view("sJoin"); });
+  }
+  function answer(i) {
+    if (S.answered !== null) return;
+    var q = curPassage().qs[S.qi], ok = i === q.key;
+    S.answered = i; S.total++;
+    var sk = S.skills[q.skill] || (S.skills[q.skill] = [0, 0]); sk[1]++;
+    if (ok) { S.right++; S.passRight++; sk[0]++; } else S.missed.push(q.id);
+    renderPractice();
+    var fb = document.querySelector(".fb"); if (fb) fb.scrollIntoView({ block: "nearest", behavior: "smooth" });
+  }
+  function next() {
+    var p = curPassage();
+    S.answered = null;
+    if (S.qi < p.qs.length - 1) { S.qi++; renderPractice(); document.getElementById("qCard").scrollIntoView({ block: "start", behavior: "smooth" }); return; }
+    var passedThis = S.passRight >= 2;
+    if (passedThis) {
+      S.passed = LEVELS[S.level].n;
+      if (S.level < LEVELS.length - 1) { S.level++; S.part = 0; S.qi = 0; S.passRight = 0; toast("Level up! On to Level " + (S.level + 1) + "."); }
+      else return finish();
+    } else if (S.part === 0) {
+      S.reteach.push(LEVELS[S.level].n); S.mode = "lesson";
+    } else {
+      S.stoppedAt = LEVELS[S.level].n; return finish();
+    }
+    renderPractice(); window.scrollTo(0, 0);
+  }
+  function finish() {
+    S.mode = "done";
+    var fresh = load(); if (fresh) D = fresh;
+    D.results[S.nick] = { at: new Date().toISOString(), passed: S.passed, right: S.right, total: S.total, reteach: S.reteach, skills: S.skills, missed: S.missed, stoppedAt: S.stoppedAt || null };
+    save(); renderPractice(); window.scrollTo(0, 0);
+  }
+
+  /* ---------------- Teacher ---------------- */
+  var authed = false;
+  $("teacherLink").addEventListener("click", function () { view("tLogin"); $("pin").focus(); });
+  $("toStudent").addEventListener("click", function () { view("sJoin"); });
+  $("pinForm").addEventListener("submit", function (e) {
+    e.preventDefault();
+    if ($("pin").value === D.pin) { authed = true; $("pin").value = ""; $("pinErr").hidden = true; renderDash(); view("tDash"); $("who").textContent = "Teacher view"; }
+    else $("pinErr").hidden = false;
+  });
+  function pct(a) { return a && a[1] ? Math.round(100 * a[0] / a[1]) : null; }
+  function levelPill(r) {
+    if (!r) return '<span class="pill p-none">Not started</span>';
+    if (r.passed === 3) return '<span class="pill p-good">Passed all 3</span>';
+    if (r.passed >= 1) return '<span class="pill p-mid">Passed Level ' + r.passed + "</span>";
+    return '<span class="pill p-low">Needs Level 1 support</span>';
+  }
+  function when(iso) { try { var d = new Date(iso); return d.toLocaleDateString(undefined, { month: "short", day: "numeric" }); } catch (e) { return ""; } }
+  function renderDash() {
+    var done = D.roster.filter(function (n) { return D.results[n]; });
+    var waiting = D.roster.filter(function (n) { return !D.results[n]; });
+    var avg = done.length ? Math.round(done.reduce(function (s, n) { var r = D.results[n]; return s + 100 * r.right / Math.max(1, r.total); }, 0) / done.length) : 0;
+    var needs = done.filter(function (n) { return D.results[n].passed < 2; });
+    var anySample = done.some(function (n) { return D.results[n].sample; });
+    var tot = {}; done.forEach(function (n) { var s = D.results[n].skills || {}; Object.keys(s).forEach(function (k) { tot[k] = tot[k] || [0, 0]; tot[k][0] += s[k][0]; tot[k][1] += s[k][1]; }); });
+    var skillRows = Object.keys(SKILLS).filter(function (k) { return tot[k] && tot[k][1]; }).sort(function (a, b) { return pct(tot[a]) - pct(tot[b]); });
+
+    var h = '<section class="card"><div class="row" style="justify-content:space-between"><div style="display:grid;gap:4px"><span class="step">Central idea · ELA.6.R.2.2 · Tier 2</span><h2>Class results</h2></div>' +
+      '<button class="btn quiet small" type="button" id="signOut">Sign out</button></div>' +
+      (anySample ? '<p class="note">Rows marked “sample” are made-up examples so you can see how the page works. Tap <b>Clear sample results</b> below before students begin.</p>' : "") + "</section>";
+
+    h += '<div class="facts">' +
+      '<div class="fact"><b>' + done.length + " of " + D.roster.length + "</b><span>students finished</span></div>" +
+      '<div class="fact"><b>' + avg + "%</b><span>class average, first try</span></div>" +
+      '<div class="fact"><b>' + needs.length + "</b><span>stopped at Level 1 or 2</span></div>" +
+      '<div class="fact"><b>' + (skillRows.length ? esc(SKILLS[skillRows[0]].name) : "None yet") + "</b><span>weakest skill</span></div></div>";
+
+    h += '<section class="card"><h3>Students</h3><div class="scroll"><table><thead><tr><th>Nickname</th><th>Result</th><th>First-try score</th><th>Quick lesson shown</th><th>Finished</th><th></th></tr></thead><tbody>' +
+      D.roster.map(function (n, i) {
+        var r = D.results[n];
+        if (!r) return "<tr><td><b>" + esc(n) + "</b></td><td>" + levelPill(null) + "</td><td>—</td><td>—</td><td>—</td><td></td></tr>";
+        var sc = Math.round(100 * r.right / Math.max(1, r.total)), c = sc >= 80 ? "p-good" : sc >= 60 ? "p-mid" : "p-low";
+        return "<tr><td><b>" + esc(n) + "</b>" + (r.sample ? '<span class="sample">sample</span>' : "") + "</td><td>" + levelPill(r) + '</td><td><span class="pill ' + c + '">' + r.right + "/" + r.total + " · " + sc + "%</span></td><td>" +
+          (r.reteach && r.reteach.length ? "Level " + r.reteach.join(", ") : "None") + "</td><td>" + when(r.at) + '</td><td><button class="linkish" type="button" data-reset="' + i + '">Let them redo it</button></td></tr>';
+      }).join("") + "</tbody></table></div>" +
+      (waiting.length ? '<p class="hint">Not finished yet: ' + waiting.map(esc).join(", ") + "</p>" : "") + "</section>";
+
+    h += '<section class="card"><h3>What to reteach</h3><p class="hint">Percent correct on the first try for each skill, weakest first.</p>' +
+      (skillRows.length ? skillRows.map(function (k) { var v = pct(tot[k]); return '<div class="skill"><div class="top"><span>' + esc(SKILLS[k].name) + "</span><span>" + v + "% (" + tot[k][0] + "/" + tot[k][1] + ')</span></div><div class="bar"><i style="width:' + v + '%"></i></div><p class="tip">' + esc(SKILLS[k].tip) + "</p></div>"; }).join("") : '<p class="hint">Results will show here after students finish.</p>') + "</section>";
+
+    h += '<div class="twocol"><section class="card"><h3>Class code</h3><div class="row"><span class="codebig" id="codeShow">' + esc(D.code) + '</span></div>' +
+      '<p class="hint">Write this on the board. Students type it on the student page.</p><div class="row"><button class="btn quiet small" type="button" id="newCode">Make a new code</button></div></section>' +
+      '<section class="card"><h3>Nicknames</h3><label class="q" for="rosterBox">One nickname per line. Use made-up names only.<textarea id="rosterBox" rows="7">' + esc(D.roster.join("\n")) + '</textarea></label>' +
+      '<div class="row"><button class="btn quiet small" type="button" id="saveRoster">Save nicknames</button><span class="status" id="rosterStatus"></span></div></section></div>';
+
+    h += '<section class="card"><h3>Save and settings</h3><div class="row">' +
+      '<button class="btn small" type="button" id="copyRes">Copy results for Google Sheets</button>' +
+      (anySample ? '<button class="btn quiet small" type="button" id="clearSample">Clear sample results</button>' : "") +
+      '<span class="status" id="copyStatus"></span></div>' +
+      '<div class="row"><label class="q" for="newPin" style="flex:1 1 200px;max-width:260px">New teacher password<input type="password" id="newPin" maxlength="20" autocomplete="off"></label>' +
+      '<button class="btn quiet small" type="button" id="savePin" style="align-self:end">Change password</button></div>' +
+      '<p class="note">Prototype: results save on this device only. To see the whole class in one place, results from every iPad would go to one shared database so this page shows the whole class.</p></section>';
+
+    $("tDash").innerHTML = h;
+    $("signOut").addEventListener("click", function () { authed = false; view("sJoin"); });
+    $("newCode").addEventListener("click", function () {
+      var L = "ABCDEFGHJKMNPQRSTUVWXYZ", c = ""; for (var i = 0; i < 3; i++) c += L[Math.floor(Math.random() * L.length)];
+      D.code = c + "-" + (100 + Math.floor(Math.random() * 900)); save(); $("codeShow").textContent = D.code; toast("New class code: " + D.code);
+    });
+    $("saveRoster").addEventListener("click", function () {
+      var seen = {}, list = $("rosterBox").value.split(/\n/).map(function (s) { return s.trim().slice(0, 24); }).filter(function (s) { if (!s || seen[s.toLowerCase()]) return false; seen[s.toLowerCase()] = 1; return true; });
+      if (!list.length) { $("rosterStatus").textContent = "Add at least one nickname."; return; }
+      D.roster = list; save(); renderDash(); toast("Nicknames saved");
+    });
+    $("tDash").querySelectorAll("[data-reset]").forEach(function (b) { b.addEventListener("click", function () { var n = D.roster[Number(b.dataset.reset)]; delete D.results[n]; save(); renderDash(); toast(n + " can try again"); }); });
+    var cs = $("clearSample"); if (cs) cs.addEventListener("click", function () { Object.keys(D.results).forEach(function (n) { if (D.results[n].sample) delete D.results[n]; }); save(); renderDash(); toast("Sample results cleared"); });
+    $("savePin").addEventListener("click", function () { var v = $("newPin").value; if (v.length < 4) { toast("Use at least 4 characters"); return; } D.pin = v; save(); $("newPin").value = ""; toast("Password changed"); });
+    $("copyRes").addEventListener("click", function () {
+      var rows = [["Nickname", "Result", "Right", "Total", "Percent", "Topic", "Central idea", "Support", "Paragraph jobs", "Quick lesson", "Date", "Sample"]];
+      D.roster.forEach(function (n) {
+        var r = D.results[n]; if (!r) { rows.push([n, "Not started"]); return; }
+        var s = r.skills || {}, f = function (k) { return s[k] && s[k][1] ? s[k][0] + "/" + s[k][1] : ""; };
+        rows.push([n, r.passed === 3 ? "Passed all 3" : r.passed ? "Passed Level " + r.passed : "Needs Level 1 support", r.right, r.total, Math.round(100 * r.right / Math.max(1, r.total)) + "%", f("topic"), f("ci"), f("evidence"), f("develop"), (r.reteach || []).join(" "), when(r.at), r.sample ? "yes" : ""]);
+      });
+      var tsv = rows.map(function (r) { return r.join("\t"); }).join("\n");
+      var st = $("copyStatus");
+      try { navigator.clipboard.writeText(tsv).then(function () { st.className = "status ok"; st.textContent = "Copied. Open a Google Sheet, click cell A1, and paste."; }, fallback); } catch (e) { fallback(); }
+      function fallback() { st.className = "status"; st.textContent = "Copy didn’t work here. Select the table above and copy it instead."; }
+    });
+  }
+
+  /* ---------------- Start ---------------- */
+  function slug(s) { return String(s).toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/^-|-$/g, ""); }
+  var card = "";
+  try { card = new URLSearchParams(location.search).get("s") || ""; } catch (e) {}
+  var cardNick = card ? D.roster.filter(function (n) { return slug(n) === slug(card); })[0] : null;
+  if ((location.hash || "").replace("#", "") === "teacher") view("tLogin");
+  else if (cardNick && !D.results[cardNick]) startPractice(cardNick);
+  else if (cardNick) { renderNames(); view("sName"); toast(cardNick + " already finished on this iPad."); }
+  else view("sJoin");
+})();
+</script>
+
+</body>
+</html>
